@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.IO;
 using System.Collections.Generic;  
 using System.Linq;
 using System.Text;
@@ -42,7 +43,7 @@ namespace ДЗ8
         }
         public decimal Balance
         {
-            get { return b;}
+            get { return b; }
         }
         public void Deposite(decimal amount)
         {
@@ -72,25 +73,27 @@ namespace ДЗ8
         }
         public void Dispose()
         {
-            string output = @"D:\Влад\Downloads\transactions.txt"
+            string output = @"D:\Влад\Downloads\transactions.txt";
             string text = "";
             while (q.Count > 0)
             {
                 BankTransaction t = (BankTransaction)q.Dequeue();
-                text += t.ToString() + Environment.NewLine();
+                text += t.ToString() + Environment.NewLine;
             }
             File.WriteAllText(output, text);
             GC.SuppressFinalize(this);
         }
         internal class Program
         {
-        static void Main(string[] args)
-        {
-            BankAccount a = new BankAccount(1000);
-            a.Deposite(500);
-            a.Withdraw(300);
-            Console.WriteLine($"Баланс:{a.Balance}");
-            Console.WriteLine("Все транзакции записаны в файл transactions");
+            static void Main(string[] args)
+            {
+                BankAccount a = new BankAccount(1000);
+                a.Deposite(500);
+                a.Withdraw(300);
+                Console.WriteLine($"Баланс:{a.Balance}");
+                a.Dispose();
+                Console.WriteLine("Все транзакции записаны в файл transactions");
+            }
         }
     }
 }
