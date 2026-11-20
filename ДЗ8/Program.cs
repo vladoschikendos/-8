@@ -71,7 +71,6 @@ namespace Vladmainproject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("===== УПРАЖНЕНИЕ 9.1 =====");
 
             BankAccount a = new BankAccount();
             BankAccount b = new BankAccount(1000);
