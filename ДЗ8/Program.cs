@@ -70,7 +70,18 @@ namespace ДЗ8
                 Console.WriteLine(t.ToString());
             }
         }
-    }
+        public void Dispose()
+        {
+            string output = @"D:\Влад\Downloads\transactions.txt"
+            string text = "";
+            while (q.Count > 0)
+            {
+                BankTransaction t = (BankTransaction)q.Dequeue();
+                text += t.ToString() + Environment.NewLine();
+            }
+            File.WriteAllText(output, text);
+            GC.SuppressFinalize(this);
+        }
         internal class Program
         {
         static void Main(string[] args)
@@ -79,7 +90,7 @@ namespace ДЗ8
             a.Deposite(500);
             a.Withdraw(300);
             Console.WriteLine($"Баланс:{a.Balance}");
-            a.PrintTransactions();
+            Console.WriteLine("Все транзакции записаны в файл transactions");
         }
     }
 }
